@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>小穎咖啡日誌</title>
+  <link rel="stylesheet" href="Term Project.css" />
+</head>
+<body>
+
+  <!-- Top Nav -->
+  <header class="siteHeader">
+    <div class="navWrap">
+      <nav class="navLeft">
+        <a class="navLink" href="#top" id="navHome">主頁</a>
+        <button id="btnRecord" class="navLink navBtn" type="button">記錄</button>
+        <a class="navLink" href="#about" id="navAbout">關於</a>
+        <a class="navLink" href="#guestbook" id="navGuestbook">留言</a>
+      </nav>
+
+      <div class="logoBox" aria-label="咖啡日誌">咖啡日誌</div>
+      <div class="navRight" aria-hidden="true"></div>
+    </div>
+  </header>
+
+  <!-- 主頁內容（可隱藏） -->
+  <div id="pageHome">
+    <section class="hero" id="top"><div class="heroInner"></div></section>
+
+    <main class="wrap">
+      <!-- 新增表單 -->
+      <section id="formCard" class="card hidden">
+        <h2 class="sectionTitle">新增咖啡廳記錄</h2>
+
+        <form id="cafeForm" class="form">
+          <div class="row two">
+            <div>
+              <label>店名 *</label>
+              <input name="name" class="input" required placeholder="例：交大咖啡" />
+            </div>
+            <div>
+              <label>造訪日期 *</label>
+              <input name="date" class="input" type="date" required />
+            </div>
+          </div>
+
+          <div class="row two">
+            <div>
+              <label>縣市 *</label>
+              <input name="city" class="input" required placeholder="例：台北市 / 新竹市 / 台南市" />
+            </div>
+            <div>
+              <label>地區 *</label>
+              <input name="district" class="input" required placeholder="例：大安區 / 東區 / 中西區" />
+            </div>
+          </div>
+
+          <div class="row">
+            <label>Google Maps 連結 *</label>
+            <input name="maps" class="input" type="url" required placeholder="貼上 Google Maps 連結" />
+          </div>
+
+          <div class="row">
+            <label>照片（選填）</label>
+            <input name="photo" class="input" type="file" accept="image/*" />
+            <div class="muted" style="margin-top:6px;">檔案太大可能要自行壓縮～</div>
+          </div>
+
+          <div class="row">
+            <label>心得 *</label>
+            <textarea name="notes" class="textarea" rows="6" required
+              placeholder="隨意填寫：環境、座位、口味、服務、回訪意願…"></textarea>
+          </div>
+
+          <div class="actions">
+            <button id="btnClearForm" class="btn" type="button">清空表單</button>
+            <button class="btn primary" type="submit">發佈</button>
+          </div>
+        </form>
+      </section>
+
+      <!-- 主頁：文章列表 -->
+      <section class="listHead">
+        <h2>主頁紀錄</h2>
+        <div class="listActions">
+          <span id="count" class="muted"></span>
+          <button id="btnClearAll" class="btn danger" type="button">清空全部</button>
+        </div>
+      </section>
+
+      <section id="posts" class="posts"></section>
+      <div id="empty" class="empty">還沒有任何紀錄。點上方「記錄」開始第一篇！</div>
+
+      <!-- 關於 -->
+      <section id="about" class="aboutCard">
+        <h2 class="sectionTitle">關於我</h2>
+        <p class="aboutText">
+          嗨嗨大家好！我是小穎🦋<br>
+          這裡是我的咖啡日誌。<br>
+          我會在台北、新竹、台南出沒，並地記錄自己走過+參訪的咖啡廳，
+          這裡會寫下 Google Maps連結、環境氛圍、餐點口味與回訪意願等等。<br>
+          希望能夠幫到尼悶🐽<br>
+          以上也僅供參考，僅代表個人意見！
+        </p>
+      </section>
+
+      <!-- 主頁底部：留言板（主頁也會有） -->
+      <section class="aboutCard" style="margin-bottom:10px;">
+        <h2 class="sectionTitle">留言板</h2>
+        <p class="muted" style="margin:0 0 12px;line-height:1.7;">
+          這裡是匿名留言，請大家放心留下想法或推薦的咖啡廳💗
+        </p>
+
+        <form id="guestFormHome" class="form">
+          <div class="row">
+            <label>留言內容 *</label>
+            <textarea name="message" class="textarea" rows="4" required placeholder="想說的話、推薦店家、建議都可以～"></textarea>
+          </div>
+          <div class="actions">
+            <button class="btn primary" type="submit">送出留言</button>
+          </div>
+        </form>
+
+        <div id="guestListHome" class="guestList"></div>
+      </section>
+
+      <footer class="footer">
+        <small>ying ying｜Pippy｜咖啡日誌</small>
+      </footer>
+    </main>
+  </div>
+
+  <!-- 留言頁（只顯示留言區塊） -->
+  <div id="pageGuestbook" class="wrap hidden">
+    <section id="guestbook" class="aboutCard" style="margin-top:18px;">
+      <h2 class="sectionTitle">留言</h2>
+      <p class="muted" style="margin:0 0 12px;line-height:1.7;">
+        這裡是匿名留言，大家可以放心留下意見或推薦給我口袋咖啡廳名單☕️。要回主畫面請點上方「主頁」。
+      </p>
+
+      <form id="guestFormPage" class="form">
+        <div class="row">
+          <label>留言內容 *</label>
+          <textarea name="message" class="textarea" rows="4" required placeholder="想說的話、推薦店家、建議都可以～"></textarea>
+        </div>
+        <div class="actions">
+          <button class="btn primary" type="submit">送出留言</button>
+        </div>
+      </form>
+
+      <div id="guestListPage" class="guestList"></div>
+    </section>
+  </div>
+
+  <script src="Term Project.js"></script>
+</body>
+</html>
